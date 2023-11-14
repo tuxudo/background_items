@@ -1,0 +1,26 @@
+i18n_title: background_items.reporttitle
+not_null_column: state_allowed
+js_link: module/background_items/js/background_items
+table:
+  - column: machine.computer_name
+    i18n_header: listing.computername
+    formatter: clientDetail
+    tab_link: background_items-tab
+  - column: reportdata.serial_number
+    i18n_header: serial
+  - {i18n_header: background_items.btm_index, column: background_items.btm_index}
+  - {i18n_header: background_items.user, column: background_items.user}
+  - {i18n_header: background_items.name, column: background_items.name}
+  - {i18n_header: background_items.developer_name, column: background_items.developer_name}
+  - {i18n_header: background_items.team_id, column: background_items.team_id}
+  - {i18n_header: background_items.assoc_bundle_id, column: background_items.assoc_bundle_id}
+  - {i18n_header: background_items.embedded_item_ids, column: background_items.embedded_item_ids}
+  - {i18n_header: background_items.state_enabled, column: background_items.state_enabled, formatter: format_background_items_yes_no_rev}
+  - {i18n_header: background_items.state_allowed, column: background_items.state_allowed, formatter: format_background_items_yes_no_rev}
+  - {i18n_header: background_items.state_visible, column: background_items.state_visible, formatter: format_background_items_yes_no_rev}
+  - {i18n_header: background_items.state_notified, column: background_items.state_notified, formatter: format_background_items_yes_no_rev}
+  - {i18n_header: background_items.url, column: background_items.url}
+  - {i18n_header: background_items.type, column: background_items.type}
+  - {i18n_header: background_items.identifier, column: background_items.identifier}
+  - {i18n_header: background_items.parent_id, column: background_items.parent_id}
+  - {i18n_header: background_items.executable_path, column: background_items.executable_path}

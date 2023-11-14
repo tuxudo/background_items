@@ -1,0 +1,9 @@
+client_tabs:
+    background_items-tab:
+        view: background_items_tab
+        i18n: background_items.background_items
+        badge: background_items-cnt
+listings:
+    background_items:
+        view: background_items_listing
+        i18n: background_items.background_items

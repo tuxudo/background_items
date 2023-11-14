@@ -1,0 +1,21 @@
+{
+    "btm_index": "BTM Dump Index",
+    "name": "Name",
+    "user": "User",
+    "developer_name": "Developer Name",
+    "url": "URL",
+    "team_id": "Team ID",
+    "assoc_bundle_id": "Associated Bundle ID",
+    "type": "Type",
+    "identifier": "Identifier",
+    "generation": "Generation",
+    "parent_id": "Parent ID",
+    "executable_path": "Executable Path",
+    "state_enabled": "Enabled",
+    "state_allowed": "Allowed",
+    "state_visible": "Visible",
+    "state_notified": "Notified",
+    "embedded_item_ids": "Embedded Item IDs",
+    "background_items": "Background Items",
+    "reporttitle": "Background Items Report"
+}
