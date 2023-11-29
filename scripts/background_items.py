@@ -97,6 +97,7 @@ def get_background_items():
                 while item != "":
                     embedded_item_ids = embedded_item_ids + item.split(': ')[1].strip() + "\n"
                     item = btm_items.split('\n')[line_index_process + 1]
+                    line_index_process += 1
                 
                 result['embedded_item_ids'] = embedded_item_ids.strip()
 
