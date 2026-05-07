@@ -1,8 +1,3 @@
-<div id="lister" style="font-size: large; float: right;">
-    <a href="/show/listing/background_items/background_items" title="List">
-        <i class="btn btn-default tab-btn fa fa-list"></i>
-    </a>
-</div>
 <h2 data-i18n="background_items.background_items"></h2>
 <div id="background_items-msg" data-i18n="listing.loading" class="col-lg-12 text-center"></div>
 
@@ -43,19 +38,16 @@ $(document).on('appReady', function(){
     $('#background_items-cnt').text('');
 
     $.getJSON(appUrl + '/module/background_items/get_tab_data/' + serialNumber, function(data){
-        const $msg = $('#background_items-msg');
-        const $tableView = $('#background_items-table-view');
-        const $badge = $('#background_items-cnt');
 
         if (!data?.length) {
-            $msg.text(i18n.t('no_data'));
+            $('#background_items-msg').text(i18n.t('no_data'));
             return;
         }
 
         // Hide message and show table
-        $msg.text('');
-        $tableView.removeClass('hide');
-        $badge.text(data.length);
+        $('#background_items-msg').text('');
+        $('#background_items-table-view').removeClass('hide');
+        $('#background_items-cnt').text(data.length);
 
         // Helper function to format state columns
         const formatState = (value) => {
