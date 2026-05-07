@@ -1,3 +1,8 @@
+<div id="lister" style="font-size: large; float: right;">
+    <a href="/show/listing/background_items/background_items" title="List">
+        <i class="btn btn-default tab-btn fa fa-list"></i>
+    </a>
+</div>
 <h2 data-i18n="background_items.background_items"></h2>
 <div id="background_items-msg" data-i18n="listing.loading" class="col-lg-12 text-center"></div>
 
@@ -35,73 +40,59 @@
 <script>
 $(document).on('appReady', function(){
     // Set blank tab badge
-    $('#background_items-cnt').text("");
+    $('#background_items-cnt').text('');
 
     $.getJSON(appUrl + '/module/background_items/get_tab_data/' + serialNumber, function(data){
+        const $msg = $('#background_items-msg');
+        const $tableView = $('#background_items-table-view');
+        const $badge = $('#background_items-cnt');
 
-        if( ! data ){
-            $('#background_items-msg').text(i18n.t('no_data'));
-        } else {
-            // Hide
-            $('#background_items-msg').text('');
-            $('#background_items-table-view').removeClass('hide');
-
-            // Update the tab badge
-            $('#background_items-cnt').text(data.length);
-
-            $('#background_items-table').DataTable({
-                data: data,
-                // order: [[0,'asc']],
-                autoWidth: false,
-                columns: [
-                    { data: 'btm_index' },
-                    { data: 'user' },
-                    { data: 'name' },
-                    { data: 'developer_name' },
-                    { data: 'team_id' },
-                    { data: 'assoc_bundle_id' },
-                    { data: 'embedded_item_ids' },
-                    { data: 'state_enabled' },
-                    { data: 'state_allowed' },
-                    { data: 'state_visible' },
-                    { data: 'state_notified' },
-                    { data: 'url' },
-                    { data: 'type' },
-                    { data: 'identifier' },
-                    { data: 'parent_id' },
-                    { data: 'executable_path' }
-                ],
-                createdRow: function( nRow, aData, iDataIndex ) {
-                    // Format state_enabled
-                    var col = $('td:eq(7)', nRow),
-                    colvar = col.text();
-                    colvar = colvar == '0' ? '<span class="label label-danger">'+i18n.t('No')+'</span>' :
-                    colvar = (colvar == '1' ? '<span class="label label-success">'+i18n.t('Yes')+'</span>' : colvar)
-                    $('td:eq(7)', nRow).html(colvar)
-
-                    // Format state_allowed
-                    var col = $('td:eq(8)', nRow),
-                    colvar = col.text();
-                    colvar = colvar == '0' ? '<span class="label label-danger">'+i18n.t('No')+'</span>' :
-                    colvar = (colvar == '1' ? '<span class="label label-success">'+i18n.t('Yes')+'</span>' : colvar)
-                    $('td:eq(8)', nRow).html(colvar)
-                    
-                    // Format state_visible
-                    var col = $('td:eq(9)', nRow),
-                    colvar = col.text();
-                    colvar = colvar == '0' ? '<span class="label label-danger">'+i18n.t('No')+'</span>' :
-                    colvar = (colvar == '1' ? '<span class="label label-success">'+i18n.t('Yes')+'</span>' : colvar)
-                    $('td:eq(9)', nRow).html(colvar)
-                    
-                    // Format state_notified
-                    var col = $('td:eq(10)', nRow),
-                    colvar = col.text();
-                    colvar = colvar == '0' ? '<span class="label label-danger">'+i18n.t('No')+'</span>' :
-                    colvar = (colvar == '1' ? '<span class="label label-success">'+i18n.t('Yes')+'</span>' : colvar)
-                    $('td:eq(10)', nRow).html(colvar)
-                }
-            });
+        if (!data?.length) {
+            $msg.text(i18n.t('no_data'));
+            return;
         }
+
+        // Hide message and show table
+        $msg.text('');
+        $tableView.removeClass('hide');
+        $badge.text(data.length);
+
+        // Helper function to format state columns
+        const formatState = (value) => {
+            return value == '0' ? '<span class="label label-danger">' + i18n.t('No') + '</span>' :
+                   value == '1' ? '<span class="label label-success">' + i18n.t('Yes') + '</span>' : value;
+        };
+
+        $('#background_items-table').DataTable({
+            data: data,
+            autoWidth: false,
+            columns: [
+                { data: 'btm_index' },
+                { data: 'user' },
+                { data: 'name' },
+                { data: 'developer_name' },
+                { data: 'team_id' },
+                { data: 'assoc_bundle_id' },
+                { data: 'embedded_item_ids' },
+                { data: 'state_enabled' },
+                { data: 'state_allowed' },
+                { data: 'state_visible' },
+                { data: 'state_notified' },
+                { data: 'url' },
+                { data: 'type' },
+                { data: 'identifier' },
+                { data: 'parent_id' },
+                { data: 'executable_path' }
+            ],
+            createdRow: function(nRow, aData, iDataIndex) {
+                // Format all state columns more efficiently
+                const stateColumns = [7, 8, 9, 10];
+                stateColumns.forEach(colIndex => {
+                    const $cell = $('td:eq(' + colIndex + ')', nRow);
+                    $cell.html(formatState($cell.text()));
+                });
+            }
+        });
     });
 });
 </script>
